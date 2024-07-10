@@ -1,6 +1,7 @@
 import {Operation} from "./Operation";
 import {Category} from "./Category";
 import {StorageData} from "./StorageData";
+import {CashTransaction} from "./CashTransaction";
 
 const storageData = new StorageData();
 const allCategories: Array<Category> = storageData.getCategoriesAll();
@@ -12,7 +13,7 @@ function getSumMapFromCategory(startDate: Date, endDate: Date): Map<Category, Nu
 
     const resultMap = new Map<Category, Number>;
     map.forEach((value,key) => {
-        let sum = value.map(o => o.sum).reduce((accumulator, currentValue) => accumulator + currentValue);
+        let sum = Array.from(value).map(o => o.sum).reduce((accumulator, currentValue) => accumulator + currentValue);
         resultMap.set(key, sum);
     })
     return resultMap;
@@ -49,7 +50,7 @@ function getOutcomeCashCategoryForPeriod(startDate: Date, endDate: Date): Map<Ca
         let list = new Set<Operation>();
         category.codes.forEach(code =>
             listOperation
-                .filter(operation => code = operation.code)
+                .filter(operation => code === operation.code)
                 .forEach(o => list.add(o))
         );
         resultMap.set(category, list)

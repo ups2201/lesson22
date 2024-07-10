@@ -1,4 +1,4 @@
-enum CashTransaction {
+export enum CashTransaction {
     OUTCOME,
     INCOME
 }
