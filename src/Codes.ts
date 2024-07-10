@@ -1,5 +1,5 @@
-
-enum MCC {
+//Merchant Category Code
+enum Codes {
     MCC1 = "MCC1",
     MCC2 = "MCC2",
     MCC3 = "MCC3",

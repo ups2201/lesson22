@@ -1,0 +1,4 @@
+enum CashTransaction {
+    OUTCOME,
+    INCOME
+}

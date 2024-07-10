@@ -1,14 +1,15 @@
-export class Category {
+export class Operation {
     id: number;
-    code: number;
-    name: string;
-    subCategory: Category[];
+    code: string;
+    date: Date;
+    sum: number;
+    type: CashTransaction;
 
-    constructor(id: number, code: number, name: string, subCategory: Category[]) {
+    constructor(id: number, code: string, date: Date, sum: number, type: CashTransaction) {
         this.id = id;
         this.code = code;
-        this.name = name;
-        this.subCategory = subCategory;
+        this.date = date;
+        this.sum = sum;
+        this.type = type;
     }
-
 }
