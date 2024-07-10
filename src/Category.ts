@@ -1,13 +1,11 @@
 export class Category {
     id: number;
-    code: Codes;
+    codes: Set<Number>;
     name: string;
-    subCategory: Array<Category>;
 
-    constructor(id: number, code: Codes, name: string, subCategory?: Array<Category>) {
+    constructor(id: number, code: Set<Number>, name: string) {
         this.id = id;
-        this.code = code;
+        this.codes = code;
         this.name = name;
-        this.subCategory = subCategory;
     }
 }
