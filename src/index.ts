@@ -6,11 +6,10 @@ import {CashTransaction} from "./CashTransaction";
 const storageData = new StorageData();
 const allCategories: Array<Category> = storageData.getCategoriesAll();
 const allOperations: Array<Operation> = storageData.getOperationsAll();
+// const map: Map<Category, Array<Operation>> = getFullMapCategoryForPeriod(listOperations, allCategories, startDate, endDate);
 
 //расход по категориям из диапозона дат
-export function getSumMapFromCategory(startDate: Date, endDate: Date): Map<Category, Number> {
-    let map: Map<Category, Array<Operation>> = getFullMapCategoryForPeriod(startDate, endDate);
-
+export function getSumMapFromCategory(map: Map<Category, Array<Operation>>, startDate: Date, endDate: Date): Map<Category, Number> {
     const resultMap = new Map<Category, Number>;
     map.forEach((value,key) => {
         let sum = Array.from(value).map(o => o.sum).reduce((accumulator, currentValue) => accumulator + currentValue);
@@ -20,9 +19,7 @@ export function getSumMapFromCategory(startDate: Date, endDate: Date): Map<Categ
 }
 
 //расход по датам из диапазона
-export function getConsumptionByDatesFromRange(startDate: Date, endDate: Date) {
-    let listOperations: Array<Operation> = getOperationFromPeriod(startDate, endDate);
-
+export function getConsumptionByDatesFromRange(listOperations: Array<Operation>, startDate: Date, endDate: Date) {
     //Получаем только расходные
     const resultMap = new Map<Date, Number>;
 
@@ -43,13 +40,12 @@ export function getConsumptionByDatesFromRange(startDate: Date, endDate: Date) {
 }
 
 // Полная мапа, связка категорий и списка операций
-export function getFullMapCategoryForPeriod(startDate: Date, endDate: Date): Map<Category, Array<Operation>> {
+export function getFullMapCategoryForPeriod(listOperations: Array<Operation>, allCategories: Array<Category>, startDate: Date, endDate: Date): Map<Category, Array<Operation>> {
     let resultMap = new Map();
-    let listOperation = getOperationFromPeriod(startDate, endDate);
     allCategories.forEach((category) => {
         let list = new Set<Operation>();
         category.codes.forEach(code =>
-            listOperation
+            listOperations
                 .filter(operation => code === operation.code)
                 .forEach(o => list.add(o))
         );
@@ -60,21 +56,21 @@ export function getFullMapCategoryForPeriod(startDate: Date, endDate: Date): Map
 }
 
 //Возвращаем все категории которые содержат определённый код операции
-export function getCategoriesContainsCode(code: number): Array<Category> {
+export function getCategoriesContainsCode(allCategories: Array<Category>, code: number): Array<Category> {
     return allCategories.filter(category => category.codes.has(code));
 }
 
 //Получаем список кодов расходных операций за определённый период
-export function getOutcomeCashCategoriesCodeFromPeriod(categoryName: string, startDate: Date, endDate: Date): Set<Number> {
-    return new Set(allOperations
+export function getOutcomeCashCategoriesCodeFromPeriod(listOperations: Array<Operation>, categoryName: string, startDate: Date, endDate: Date): Set<Number> {
+    return new Set(listOperations
         .filter(operation => operation.type === CashTransaction.OUTCOME)
         .filter(operation => operation.date > startDate)
         .filter(operation => operation.date < endDate)
         .map(operation => operation.code));
 }
 
-export function getOperationFromPeriod(startDate: Date, endDate: Date): Array<Operation> {
-    return Array.from(allOperations
+export function getOperationFromPeriod(listOperations: Array<Operation>, startDate: Date, endDate: Date): Array<Operation> {
+    return Array.from(listOperations
         .filter(operation => operation.date > startDate)
         .filter(operation => operation.date < endDate));
 }
@@ -87,9 +83,7 @@ export function getSumOperations(listOperations: Array<Operation>): number {
 }
 
 //сортировка категорий по сумме за указанный диапозон дат
-export function sortCategoryForPeriod(startDate: Date, endDate: Date): Map<Category, Number> {
-    const map: Map<Category, Array<Operation>> = getFullMapCategoryForPeriod(startDate, endDate);
-
+export function sortCategoryForPeriod(map: Map<Category, Array<Operation>>, startDate: Date, endDate: Date): Map<Category, Number> {
     const resultMap: Map<Category, Number> = new Map();
     map.forEach((value, key) => resultMap.set(key, getSumOperations(value)));
 
