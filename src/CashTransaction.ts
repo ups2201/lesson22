@@ -1,4 +1,4 @@
 export enum CashTransaction {
-    OUTCOME,
-    INCOME
+    OUTCOME = "OUTCOME",
+    INCOME = "INCOME"
 }
