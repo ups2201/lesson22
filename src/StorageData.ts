@@ -16,15 +16,16 @@ export class StorageData implements IStorageData {
 
     constructor() {
         const operations = new Array<Operation>();
-        operations.push(new Operation(1, 111, new Date(2024, 7, 7, 10,1,0), 101, CashTransaction.OUTCOME));
-        operations.push(new Operation(2, 111, new Date(2024, 7, 8, 10,2,0), 102, CashTransaction.OUTCOME));
-        operations.push(new Operation(3, 111, new Date(2024, 7, 9, 10,3,0), 103, CashTransaction.OUTCOME));
-        operations.push(new Operation(4, 777, new Date(2024, 6, 4, 10,4,0), 1000, CashTransaction.INCOME));
-        operations.push(new Operation(5, 777, new Date(2024, 7, 3, 10,5,0), 2000, CashTransaction.INCOME));
-        operations.push(new Operation(6, 333, new Date(2024, 7, 2, 10,6,0), 105, CashTransaction.OUTCOME));
-        operations.push(new Operation(7, 333, new Date(2024, 6, 1, 10,7,0), 106, CashTransaction.OUTCOME));
-        operations.push(new Operation(8, 444, new Date(2024, 2, 1, 10,8,0), 2300, CashTransaction.OUTCOME));
-        operations.push(new Operation(9, 444, new Date(2024, 3, 1, 10,9,0), 2300, CashTransaction.OUTCOME));
+
+        operations.push(new Operation(1, 111,  new Date("2024-07-07T10:01:00"), 101, CashTransaction.OUTCOME));
+        operations.push(new Operation(2, 111,  new Date("2024-07-08T10:02:02"), 102, CashTransaction.OUTCOME));
+        operations.push(new Operation(3, 111,  new Date("2024-07-09T10:03:00"), 103, CashTransaction.OUTCOME));
+        operations.push(new Operation(4, 777,  new Date("2024-06-04T10:04:00"), 1000, CashTransaction.INCOME));
+        operations.push(new Operation(5, 777,  new Date("2024-07-03T10:05:00"), 2000, CashTransaction.INCOME));
+        operations.push(new Operation(6, 333,  new Date("2024-07-02T10:06:00"), 105, CashTransaction.OUTCOME));
+        operations.push(new Operation(7, 333,  new Date("2024-06-01T10:07:00"), 106, CashTransaction.OUTCOME));
+        operations.push(new Operation(8, 444,  new Date("2024-02-02T10:08:00"), 2300, CashTransaction.OUTCOME));
+        operations.push(new Operation(9, 444,  new Date("2024-03-01T10:09:00"), 2300, CashTransaction.OUTCOME));
         this.operations = operations;
 
         const categories = new Array<Category>();
