@@ -7,7 +7,7 @@ import {
   getSumOperations,
   sortCategoryForPeriod,
   getConsumptionByDatesFromRange,
-} from "./index.ts";
+} from "./Functions.ts";
 import { Operation } from "./Operation";
 import { CashTransaction } from "./CashTransaction";
 import { Category } from "./Category";
