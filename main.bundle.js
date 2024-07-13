@@ -30,13 +30,23 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
-/***/ "./src/calendar/MyStorage.ts":
-/*!***********************************!*\
-  !*** ./src/calendar/MyStorage.ts ***!
-  \***********************************/
+/***/ "./src/calendar/LocalStorage.ts":
+/*!**************************************!*\
+  !*** ./src/calendar/LocalStorage.ts ***!
+  \**************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   LocalStorage: () => (/* binding */ LocalStorage),\n/* harmony export */   RemoteStorage: () => (/* binding */ RemoteStorage)\n/* harmony export */ });\n/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/app */ \"./node_modules/firebase/app/dist/esm/index.esm.js\");\n/* harmony import */ var firebase_database__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/database */ \"./node_modules/firebase/database/dist/esm/index.esm.js\");\n// Import the functions you need from the SDKs you need\n\n\n\n// Your web app's Firebase configuration\nconst firebaseConfig = {\n  apiKey: \"AIzaSyBtNoGzf6OQpsL7J4SZfAUMQJdrO68BCh8\",\n  authDomain: \"test-db-otus.firebaseapp.com\",\n  projectId: \"test-db-otus\",\n  storageBucket: \"test-db-otus.appspot.com\",\n  messagingSenderId: \"301390592284\",\n  appId: \"1:301390592284:web:a989d4400ba7d6133e62d9\",\n  databaseURL: \"https://test-db-otus-default-rtdb.europe-west1.firebasedatabase.app\"\n};\nclass RemoteStorage {\n  constructor() {\n    const app = (0,firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)(firebaseConfig);\n    this.db = (0,firebase_database__WEBPACK_IMPORTED_MODULE_1__.getDatabase)(app);\n  }\n  async getItem(key) {\n    return (await (0,firebase_database__WEBPACK_IMPORTED_MODULE_1__.get)((0,firebase_database__WEBPACK_IMPORTED_MODULE_1__.ref)(this.db, key))).val();\n  }\n  setItem(key, value) {\n    //Сохранение значения в firebase\n    return (0,firebase_database__WEBPACK_IMPORTED_MODULE_1__.set)((0,firebase_database__WEBPACK_IMPORTED_MODULE_1__.ref)(this.db, key), value);\n  }\n}\nclass LocalStorage {\n  getItem(key) {\n    return JSON.parse(window.localStorage.getItem(key));\n  }\n  setItem(key, value) {\n    window.localStorage.setItem(key, JSON.stringify(value));\n  }\n}\n\n//# sourceURL=webpack://lesson22/./src/calendar/MyStorage.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   LocalStorage: () => (/* binding */ LocalStorage)\n/* harmony export */ });\nclass LocalStorage {\n  async getItem(key) {\n    return JSON.parse(window.localStorage.getItem(key));\n  }\n  setItem(key, value) {\n    window.localStorage.setItem(key, JSON.stringify(value));\n  }\n}\n\n//# sourceURL=webpack://lesson22/./src/calendar/LocalStorage.ts?");
+
+/***/ }),
+
+/***/ "./src/calendar/RemoteStorage.ts":
+/*!***************************************!*\
+  !*** ./src/calendar/RemoteStorage.ts ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   RemoteStorage: () => (/* binding */ RemoteStorage)\n/* harmony export */ });\n/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/app */ \"./node_modules/firebase/app/dist/esm/index.esm.js\");\n/* harmony import */ var firebase_database__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/database */ \"./node_modules/firebase/database/dist/esm/index.esm.js\");\n// Import the functions you need from the SDKs you need\n\n\n\n// Your web app's Firebase configuration\nconst firebaseConfig = {\n  apiKey: \"AIzaSyBtNoGzf6OQpsL7J4SZfAUMQJdrO68BCh8\",\n  authDomain: \"test-db-otus.firebaseapp.com\",\n  projectId: \"test-db-otus\",\n  storageBucket: \"test-db-otus.appspot.com\",\n  messagingSenderId: \"301390592284\",\n  appId: \"1:301390592284:web:a989d4400ba7d6133e62d9\",\n  databaseURL: \"https://test-db-otus-default-rtdb.europe-west1.firebasedatabase.app\"\n};\nclass RemoteStorage {\n  constructor() {\n    const app = (0,firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)(firebaseConfig);\n    this.db = (0,firebase_database__WEBPACK_IMPORTED_MODULE_1__.getDatabase)(app);\n  }\n  async getItem(key) {\n    return (await (0,firebase_database__WEBPACK_IMPORTED_MODULE_1__.get)((0,firebase_database__WEBPACK_IMPORTED_MODULE_1__.ref)(this.db, key))).val();\n  }\n  async setItem(key, value) {\n    //Сохранение значения в firebase\n    return (0,firebase_database__WEBPACK_IMPORTED_MODULE_1__.set)((0,firebase_database__WEBPACK_IMPORTED_MODULE_1__.ref)(this.db, key), value);\n  }\n}\n\n//# sourceURL=webpack://lesson22/./src/calendar/RemoteStorage.ts?");
 
 /***/ }),
 
@@ -46,7 +56,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _calendar_MyStorage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./calendar/MyStorage */ \"./src/calendar/MyStorage.ts\");\n\nconst remoteStorage = new _calendar_MyStorage__WEBPACK_IMPORTED_MODULE_0__.RemoteStorage();\nremoteStorage.getItem(\"day1\").then(result => console.log(result));\n\n//# sourceURL=webpack://lesson22/./src/index.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _calendar_RemoteStorage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./calendar/RemoteStorage */ \"./src/calendar/RemoteStorage.ts\");\n/* harmony import */ var _calendar_LocalStorage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./calendar/LocalStorage */ \"./src/calendar/LocalStorage.ts\");\n\n\nconst remoteStorage = new _calendar_RemoteStorage__WEBPACK_IMPORTED_MODULE_0__.RemoteStorage();\nremoteStorage.getItem(\"day1\").then(result => console.log(result));\nremoteStorage.setItem(\"day2\", {\n  test3: 3\n}).then(() => console.log(\"Данные успешно сохранились в firebase\"));\nconst localStorage = new _calendar_LocalStorage__WEBPACK_IMPORTED_MODULE_1__.LocalStorage();\nlocalStorage.setItem(\"day2\", {\n  test3: 3\n});\nlocalStorage.getItem(\"day2\").then(result => console.log(result));\n\n//# sourceURL=webpack://lesson22/./src/index.ts?");
 
 /***/ }),
 
