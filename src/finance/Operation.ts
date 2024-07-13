@@ -1,3 +1,5 @@
+import { CashTransaction } from "./CashTransaction";
+
 export class Operation {
   id: number;
   code: number;

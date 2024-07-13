@@ -1,4 +1,4 @@
-import {IStorage} from "./MyStorage";
+import { IStorage } from "./MyStorage";
 
 export interface ICalendar {
   create();
@@ -20,8 +20,6 @@ export class CalendarDay {
     this.text = text;
   }
 }
-
-
 
 export class Calendar implements ICalendar {
   storage: IStorage;

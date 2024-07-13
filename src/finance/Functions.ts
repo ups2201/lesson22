@@ -2,7 +2,7 @@ import { Operation } from "./Operation";
 import { Category } from "./Category";
 import { StorageData } from "./StorageData";
 import { CashTransaction } from "./CashTransaction";
-import { CalendarDay, LocalStorage } from "./Calendar";
+import { CalendarDay, LocalStorage } from "../calendar/Calendar";
 
 //расход по категориям из диапозона дат
 export function getSumMapFromCategory(
