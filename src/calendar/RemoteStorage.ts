@@ -8,8 +8,9 @@ import {
   set,
   onValue,
   remove,
+  update,
 } from "firebase/database";
-import {IStorage} from "./IStorage";
+import { IStorage } from "./IStorage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -38,7 +39,6 @@ export class RemoteStorage implements IStorage {
   }
 
   async setItem(key: string, value: any): Promise<void> {
-    //Сохранение значения в firebase
     return set(ref(this.db, this.namespace + key), value);
   }
 
@@ -46,4 +46,7 @@ export class RemoteStorage implements IStorage {
     return remove(ref(this.db, this.namespace + key));
   }
 
+  async updateItem(key: string, value: any): Promise<void> {
+    return update(ref(this.db, this.namespace + key), value);
+  }
 }
