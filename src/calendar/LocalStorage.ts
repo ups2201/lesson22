@@ -15,7 +15,7 @@ export class LocalStorage implements IStorage {
     window.localStorage.setItem(this.namespace + key, JSON.stringify(value));
   }
 
-  remove(key: string): void {
+  removeItem(key: string): void {
     window.localStorage.removeItem(this.namespace + key);
   }
 

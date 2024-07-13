@@ -42,7 +42,7 @@ export class RemoteStorage implements IStorage {
     return set(ref(this.db, this.namespace + key), value);
   }
 
-  async remove(key: string): Promise<void> {
+  async removeItem(key: string): Promise<void> {
     return remove(ref(this.db, this.namespace + key));
   }
 

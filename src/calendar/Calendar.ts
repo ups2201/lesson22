@@ -30,7 +30,7 @@ export class Calendar implements ICalendar {
   }
 
   deleteTask(task: Task) {
-    this.storage.remove(task.id.toString());
+    this.storage.removeItem(task.id.toString());
   }
 
   getAllTasks(): Promise<Set<Task>> {
