@@ -30,6 +30,16 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
+/***/ "./src/calendar/Calendar.ts":
+/*!**********************************!*\
+  !*** ./src/calendar/Calendar.ts ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   Calendar: () => (/* binding */ Calendar)\n/* harmony export */ });\nclass Calendar {\n  constructor(element, storage) {\n    this.element = element;\n    this.storage = storage;\n  }\n  getTask(id) {\n    return this.storage.getItem(id);\n  }\n  addTask(task) {\n    this.storage.setItem(task.id.toString(), task);\n  }\n  create(element) {}\n  deleteTask(task) {\n    this.storage.remove(task.id.toString());\n  }\n  getAllTasks() {\n    return this.storage.getItem(\"\");\n  }\n}\n\n//# sourceURL=webpack://lesson22/./src/calendar/Calendar.ts?");
+
+/***/ }),
+
 /***/ "./src/calendar/LocalStorage.ts":
 /*!**************************************!*\
   !*** ./src/calendar/LocalStorage.ts ***!
@@ -50,13 +60,23 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
+/***/ "./src/calendar/Task.ts":
+/*!******************************!*\
+  !*** ./src/calendar/Task.ts ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   Task: () => (/* binding */ Task)\n/* harmony export */ });\nclass Task {\n  constructor(id, date, tags, status, text) {\n    this.id = id;\n    this.date = date;\n    this.tags = tags;\n    this.status = status;\n    this.text = text;\n  }\n}\n\n//# sourceURL=webpack://lesson22/./src/calendar/Task.ts?");
+
+/***/ }),
+
 /***/ "./src/index.ts":
 /*!**********************!*\
   !*** ./src/index.ts ***!
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _calendar_RemoteStorage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./calendar/RemoteStorage */ \"./src/calendar/RemoteStorage.ts\");\n/* harmony import */ var _calendar_LocalStorage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./calendar/LocalStorage */ \"./src/calendar/LocalStorage.ts\");\n\n\nconst remoteStorage = new _calendar_RemoteStorage__WEBPACK_IMPORTED_MODULE_0__.RemoteStorage();\nremoteStorage.getItem(\"day1\").then(result => console.log(result));\nremoteStorage.setItem(\"day2\", {\n  test3: 3\n}).then(() => console.log(\"Данные успешно сохранились в firebase\"));\nconst localStorage = new _calendar_LocalStorage__WEBPACK_IMPORTED_MODULE_1__.LocalStorage();\nlocalStorage.setItem(\"day2\", {\n  test3: 3\n});\nlocalStorage.getItem(\"day2\").then(result => console.log(result));\n\n//# sourceURL=webpack://lesson22/./src/index.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _calendar_RemoteStorage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./calendar/RemoteStorage */ \"./src/calendar/RemoteStorage.ts\");\n/* harmony import */ var _calendar_LocalStorage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./calendar/LocalStorage */ \"./src/calendar/LocalStorage.ts\");\n/* harmony import */ var _calendar_Task__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./calendar/Task */ \"./src/calendar/Task.ts\");\n/* harmony import */ var _calendar_Calendar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./calendar/Calendar */ \"./src/calendar/Calendar.ts\");\n\n\n\n\nconst task1 = new _calendar_Task__WEBPACK_IMPORTED_MODULE_2__.Task(1, new Date(Date.now()), new Set([\"tag1, tag2\"]), \"OPEN\", \"Первая задача\");\nconst remoteStorage = new _calendar_RemoteStorage__WEBPACK_IMPORTED_MODULE_0__.RemoteStorage(\"remoteStorage/tasks/\");\nconst calendar1 = new _calendar_Calendar__WEBPACK_IMPORTED_MODULE_3__.Calendar(document.querySelector('body'), remoteStorage);\ncalendar1.addTask(task1);\ncalendar1.getTask(\"1\").then(result => console.log(result));\nconst localStorage = new _calendar_LocalStorage__WEBPACK_IMPORTED_MODULE_1__.LocalStorage(\"localStorage/tasks/\");\nconst calendar2 = new _calendar_Calendar__WEBPACK_IMPORTED_MODULE_3__.Calendar(document.querySelector('body'), localStorage);\ncalendar2.addTask(task1);\ncalendar2.getTask(\"1\").then(result => console.log(result));\n\n//# sourceURL=webpack://lesson22/./src/index.ts?");
 
 /***/ }),
 
