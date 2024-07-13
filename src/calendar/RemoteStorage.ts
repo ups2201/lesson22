@@ -21,11 +21,6 @@ const firebaseConfig = {
     "https://test-db-otus-default-rtdb.europe-west1.firebasedatabase.app",
 };
 
-export interface IStorage {
-  getItem(key: string): any | null;
-  setItem(key: string, value: any): void;
-}
-
 export class RemoteStorage implements IStorage {
   db: Database;
   v: string;
@@ -39,18 +34,8 @@ export class RemoteStorage implements IStorage {
     return (await get(ref(this.db, key))).val();
   }
 
-  setItem(key: string, value: any): Promise<void> {
+  async setItem(key: string, value: any): Promise<void> {
     //Сохранение значения в firebase
     return set(ref(this.db, key), value);
-  }
-}
-
-export class LocalStorage implements IStorage {
-  getItem(key: string): any | null {
-    return JSON.parse(window.localStorage.getItem(key));
-  }
-
-  setItem(key: string, value: any): void {
-    window.localStorage.setItem(key, JSON.stringify(value));
   }
 }

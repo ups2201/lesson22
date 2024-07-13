@@ -1,4 +1,4 @@
-import { IStorage } from "./MyStorage";
+import { IStorage } from "./IStorage";
 
 export interface ICalendar {
   create();
