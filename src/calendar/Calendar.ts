@@ -1,9 +1,9 @@
-import { IStorage } from "./IStorage";
+import { IStorage } from "./Storage";
 import { Task } from "./Task";
 
 export interface ICalendar {
   create(element: HTMLElement);
-  getTask(id: string): Promise<Task>;
+  getTaskById(id: string): Promise<Task>;
   getAllTasks(): Promise<Set<Task>>;
   addTask(task: Task);
   updateTask(task: Task);
@@ -19,7 +19,7 @@ export class Calendar implements ICalendar {
     this.storage = storage;
   }
 
-  getTask(id: string): Promise<Task> {
+  getTaskById(id: string): Promise<Task> {
     return this.storage.getItem(id);
   }
 
@@ -28,7 +28,9 @@ export class Calendar implements ICalendar {
   }
 
   create(element: HTMLElement) {
-    document.append(element);
+    const calendarElement = document.createElement("div");
+    calendarElement.innerHTML = `тут будет вёрстка`;
+    this.element.append(calendarElement);
   }
 
   removeTask(task: Task) {

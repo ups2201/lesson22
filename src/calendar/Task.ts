@@ -1,14 +1,14 @@
 export class Task {
   id: number;
   date: number;
-  tags: Set<string>;
+  tags: [string];
   status: string;
   text: string;
 
   constructor(
     id: number,
     date: Date,
-    tags?: Set<string>,
+    tags?: [string],
     status?: string,
     text?: string,
   ) {

@@ -1,11 +1,10 @@
 import { describe, expect, test } from "@jest/globals";
 import { Task } from "./Task";
 import { Calendar } from "./Calendar";
-import { LocalStorage } from "./LocalStorage";
 import "jest-localstorage-mock";
-import { RemoteStorage } from "./RemoteStorage";
 import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
+import { Storage } from "./Storage";
 // require('jest-localstorage-mock');
 
 const localStorageMock = (function () {
@@ -43,34 +42,18 @@ describe("Проверка календаря с localStorage", () => {
   beforeEach(() => {
     tasks = new Array<Task>();
     tasks.push(
-      new Task(
-        1,
-        new Date(Date.now()),
-        new Set<string>(["tag1, tag2"]),
-        "OPEN",
-        "1 задача",
-      ),
+      new Task(1, new Date(Date.now()), ["tag1, tag2"], "OPEN", "1 задача"),
     );
     tasks.push(
-      new Task(
-        2,
-        new Date(Date.now()),
-        new Set<string>(["tag1, tag2"]),
-        "OPEN",
-        "2 задача",
-      ),
+      new Task(2, new Date(Date.now()), ["tag1, tag2"], "OPEN", "2 задача"),
     );
     tasks.push(
-      new Task(
-        3,
-        new Date(Date.now()),
-        new Set<string>(["tag1, tag2"]),
-        "OPEN",
-        "3 задача",
-      ),
+      new Task(3, new Date(Date.now()), ["tag1, tag2"], "OPEN", "3 задача"),
     );
 
-    const localStorage: LocalStorage = new LocalStorage("localStorage/tasks/");
+    const localStorage: Storage.LocalStorage = new Storage.LocalStorage(
+      "localStorage/tasks/",
+    );
     calendar = new Calendar(document.querySelector("div"), localStorage);
 
     jest.restoreAllMocks();
@@ -94,12 +77,12 @@ describe("Проверка календаря с localStorage", () => {
     const updateTask = new Task(
       1,
       new Date(Date.now()),
-      new Set<string>(["tag1, tag2"]),
+      ["tag1, tag2"],
       "OPEN",
       "Обновлённая",
     );
     calendar.updateTask(updateTask);
-    expect(updateTask).toEqual(
+    expect(JSON.stringify(updateTask)).toEqual(
       localStorageMock.getItem("localStorage/tasks/1"),
     );
   });
